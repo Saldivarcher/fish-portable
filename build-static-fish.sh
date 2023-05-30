@@ -295,21 +295,12 @@ checkResult $?
 
 cd ${FISH_STATIC_HOME} || exit 1
 
-# strip text from binary
-cp ${FISH_STATIC_HOME}/bin/fish ${FISH_STATIC_HOME}/bin/${FISH_BIN}
-cp ${FISH_STATIC_HOME}/bin/${FISH_BIN} ${FISH_STATIC_HOME}/bin/${FISH_BIN}.stripped
-printf "Stripping....."
-strip ${FISH_STATIC_HOME}/bin/${FISH_BIN}.stripped
-checkResult $?
-
 echo ""
-echo "Resulting files:"
+echo "Tar'ing directory...:"
 echo "----------------"
-echo "Standard fish binary:   ${FISH_STATIC_HOME}/bin/${FISH_BIN}.gz"
-echo "Stripped fish binary:   ${FISH_STATIC_HOME}/bin/${FISH_BIN}.stripped.gz"
+echo "${FISH_STATIC_HOME}"
 
-gzip ${FISH_STATIC_HOME}/bin/${FISH_BIN}
-gzip ${FISH_STATIC_HOME}/bin/${FISH_BIN}.stripped
+tar --exclude=${FISH_STATIC_HOME}/src/* -zcvf /tmp/fish-static.${OS}-${ARCH}.tar.gz ${FISH_STATIC_HOME}
 
 echo ""
 echo "----------------------------------------"

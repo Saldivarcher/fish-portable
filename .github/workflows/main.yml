@@ -39,14 +39,15 @@ jobs:
       with:
         name: fish-linux-x86
         path: |
-          /tmp/fish-static/bin/fish.*.gz
+          /tmp/fish-static.*.gz
 
     - name: Upload assets
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          /tmp/fish-static/bin/*.gz
+          /tmp/fish-static.*.gz
+
   # This workflow contains a single job called "build"
   build_aarch64:
     # The type of runner that the job will run on
@@ -83,12 +84,12 @@ jobs:
         with:
           name: fish-linux-aarch64
           path: |
-            /tmp/fish-static/bin/fish.*.gz
+            /tmp/fish-static.*.gz
 
       - name: Upload assets
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            /tmp/fish-static/bin/*.gz
+            /tmp/fish-static.*.gz
 
